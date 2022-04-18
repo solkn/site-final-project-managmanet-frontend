@@ -1,20 +1,13 @@
-import { combineReducers } from "redux"
-import { AdminReducer } from "./features/admin/Redux/AdminReducer";
+import { combineReducers } from 'redux';
+import { AdminReducer } from './features/admin/Redux';
+import assignCoordinatorReducer from './features/admin/Redux/assignCoordinator/reducer';
 
-const rootReducer =  combineReducers ({
-  admin:AdminReducer, 
+import { authReducer } from './features/auth/AuthReducer';
+
+const rootReducer = combineReducers({
+  auth:authReducer,
+  admin:AdminReducer,
+  assign:assignCoordinatorReducer
 });
 
 export default rootReducer;
-
-// import { combineReducers } from "redux";
-// import userReducer from "./user/reducer";
-// import messageReducer from "./message/reducer";
-
-// const rootReducer = combineReducers({
-//   user: userReducer,
-//   message:messageReducer,
-
-// });
-
-// export default rootReducer;

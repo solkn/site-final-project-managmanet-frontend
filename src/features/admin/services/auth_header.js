@@ -13,8 +13,10 @@ const token = "d27dcefc9ee0dafeceac0b131a22cb6534861de6";
 export function authHeader() {
 
   return {
-     'Content-Type': 'application/json',
-     'Authorization': `Token ${token}`
+    //'Authorization': `token ${localStorage.getItem('token')}`
+
+    'Authorization': 'token ' + localStorage.getItem('token')
+
   }
 
 }

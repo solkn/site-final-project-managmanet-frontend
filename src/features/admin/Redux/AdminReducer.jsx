@@ -1,9 +1,11 @@
-
 import { ADMINACTIONTYPES } from "./AdminType";
+
 
 const INITIAL_STATE = {
   fetchStaffLoading:false,
   fetchStaffSuccess:false,
+  createStaffLoading:false,
+  createStaffSuccess:false,
   updateStaffLoading:false,
   updateStaffSuccess:false,
   deleteStaffLoading:false,
@@ -11,11 +13,15 @@ const INITIAL_STATE = {
   fetchStaffFailure:null,
   updateStaffFailure:null,
   deleteStaffFailure:null,
-  staffs:null,
+  staffs:{},
   staff:{},
 
   fetchStudentLoading:false,
   fetchStudentSuccess:false,
+  createStudentLoading:false,
+  createStudentSuccess:false,
+  uploadStudentLoading:false,
+  uploadStudentSucces:false,
   updateStudentLoading:false,
   updateStudentSuccess:false,
   deleteStudentLoading:false,
@@ -23,7 +29,7 @@ const INITIAL_STATE = {
   fetchStudentFailure:null,
   updateStudentFailure:null,
   deleteStudentFailure:null,
-  students:null,
+  students:{},
   student:{},
 };
 
@@ -35,7 +41,7 @@ export const AdminReducer = (state = INITIAL_STATE, action) =>{
       return {
         ...state,
         fetchStaffLoading:true,
-        fetchStaffFailure:null,
+        fetchStaffFailure:'',
 
       };
     case ADMINACTIONTYPES.STAFF_FETCH_SUCCESS:
@@ -52,11 +58,33 @@ export const AdminReducer = (state = INITIAL_STATE, action) =>{
         fetchStaffFailure:action.payload.error,
       };
     
+      case ADMINACTIONTYPES.STAFF_CREATE_START:
+        return {
+          ...state,
+          createStaffLoading:true,
+          createStaffFailure:'',  
+  
+        };
+      
+      case ADMINACTIONTYPES.STAFF_CREATE_SUCCESS:
+        return {
+          ...state,
+          createStaffLoading:false,
+          createStaffSuccess:true,
+          staffs:[action.payload,...state.staffs],
+        };
+      case ADMINACTIONTYPES.STAFF_CREATE_FAILURE:
+        return {
+          ...state,
+          createStaffLoading:false,
+          createStaffFailure:action.payload.error,
+        };  
+    
     case ADMINACTIONTYPES.STAFF_UPDATE_START:
       return {
         ...state,
         updateStaffLoading:true,
-        updateStaffFailure:null,  
+        updateStaffFailure:'',  
 
       };
     
@@ -73,6 +101,7 @@ export const AdminReducer = (state = INITIAL_STATE, action) =>{
         updateStaffLoading:false,
         updateStaffFailure:action.payload.error,
       };
+      
       
     case ADMINACTIONTYPES.STAFF_DELETE_START:
       return {
@@ -117,11 +146,53 @@ export const AdminReducer = (state = INITIAL_STATE, action) =>{
         fetchStudentFailure:action.payload.error,
       };
     
+      case ADMINACTIONTYPES.STUDENT_CREATE_START:
+        return {
+          ...state,
+          createStudentLoading:true,
+          createStaffFailure:'',  
+  
+        };
+      
+      case ADMINACTIONTYPES.STUDENT_CREATE_SUCCESS:
+        return {
+          ...state,
+          createStudentLoading:false,
+          createStudentSuccess:true,
+          students:[action.payload.student,...state.students],
+        };
+      case ADMINACTIONTYPES.STUDENT_CREATE_FAILURE:
+        return {
+          ...state,
+          createStaffLoading:false,
+          createStudentFailure:action.payload.error,
+        };  
+        case ADMINACTIONTYPES.STUDENT_UPLOAD_START:
+          return {
+            ...state,
+            createStudentLoading:true,
+            createStaffFailure:'',  
+    
+          };
+        
+        case ADMINACTIONTYPES.STUDENT_UPLOAD_SUCCESS:
+          return {
+            ...state,
+            uploadStudentLoading:false,
+            uploadStudentSucces:true,
+            students:[action.payload.student,...state.students],
+          };
+        case ADMINACTIONTYPES.STUDENT_UPLOAD_FAILURE:
+          return {
+            ...state,
+            uploadStudentLoading:false,
+            uploadStudentFailure:action.payload.error,
+          };
     case ADMINACTIONTYPES.STUDENT_UPDATE_START:
       return {
         ...state,
         updateStudentLoading:true,
-        updateStudentFailure:null,  
+        updateStudentFailure:'',  
 
       };
     
@@ -143,7 +214,7 @@ export const AdminReducer = (state = INITIAL_STATE, action) =>{
       return {
         ...state,
         deleteStudentLoading:true,
-        deleteStudentFailure:null,  
+        deleteStudentFailure:'',  
 
       };
       

@@ -1,6 +1,8 @@
+
 import { ADMINACTIONTYPES } from "./AdminType";
-import  AdminStaffService  from "../services/admin_staff_service";
-import  AdminStudentService from "../services/admin_student_service";
+import AdminStaffService from "../services/AdminStaffService";
+import AdminStudentService from "../services/AdminStudentService";
+import axios from "axios";
 
 /**
  * STAFF FETCH ACTION
@@ -8,43 +10,79 @@ import  AdminStudentService from "../services/admin_student_service";
  */
 
 
-export const fetchStaffStart = () =>({
-  type:ADMINACTIONTYPES.STAFF_FETCH_START,
+export const fetchStaffStart = () => ({
+  type: ADMINACTIONTYPES.STAFF_FETCH_START,
 });
 
-export const fetchStaffSuccess = (staff) =>({
-  type:ADMINACTIONTYPES.STAFF_FETCH_SUCCESS,
-  payload:{
+export const fetchStaffSuccess = (staff) => ({
+  type: ADMINACTIONTYPES.STAFF_FETCH_SUCCESS,
+  payload: {
     staff,
   },
 });
 
-export const fetchStaffFailure = (error) =>({
-  type:ADMINACTIONTYPES.STAFF_FETCH_FAILURE,
-  payload:{
+export const fetchStaffFailure = (error) => ({
+  type: ADMINACTIONTYPES.STAFF_FETCH_FAILURE,
+  payload: {
     error,
   },
 });
+
+
+/**
+ * STAFF CREATE ACTION
+ * 
+ * @returns ACTION 
+ */
+
+export const createStaffStart = () => ({
+  type: ADMINACTIONTYPES.STAFF_CREATE_START,
+});
+
+export const createStaffSuccess = (username, email, password, password2, first_name, last_name) => ({
+  type: ADMINACTIONTYPES.STAFF_CREATE_SUCCESS,
+  payload: {
+    username,
+    email,
+    password,
+    password2,
+    first_name,
+    last_name
+  },
+});
+
+export const createStaffFailure = (error) => ({
+  type: ADMINACTIONTYPES.STAFF_CREATE_FAILURE,
+  payload: {
+    error,
+  },
+});
+
+
+
+
+
+
 
 /**
  * STAFF UPDATE ACTION
  * @returns ACTION
  */
 
-export const updateStaffStart = ()=>({
-  type:ADMINACTIONTYPES.STAFF_UPDATE_START,
+export const updateStaffStart = () => ({
+  type: ADMINACTIONTYPES.STAFF_UPDATE_START,
 });
 
-export const updateStaffSuccess = (staff)=>({
-  type:ADMINACTIONTYPES.STAFF_UPDATE__SUCCESS,
-  payload:{
+export const updateStaffSuccess = (staff) => ({
+  type: ADMINACTIONTYPES.STAFF_UPDATE__SUCCESS,
+  payload: {
     staff,
   },
 });
 
-export const updateStaffFailure = (error)=>({
-  type:ADMINACTIONTYPES.STAFF_UPDATE_FAILURE,
-  payload:{
+export const updateStaffFailure = (error) => ({
+  type: ADMINACTIONTYPES.STAFF_UPDATE_FAILURE,
+  payload: {
     error,
   },
 });
@@ -54,20 +92,20 @@ export const updateStaffFailure = (error)=>({
  * @returns ACTION
  */
 
-export const deleteStaffStart = ()=>({
-  type:ADMINACTIONTYPES.STAFF_DELETE_START,
+export const deleteStaffStart = () => ({
+  type: ADMINACTIONTYPES.STAFF_DELETE_START,
 });
 
-export const deleteStaffSuccess = (staff)=>({
-  type:ADMINACTIONTYPES.STAFF_DELETE_SUCCESS,
-  payload:{
+export const deleteStaffSuccess = (staff) => ({
+  type: ADMINACTIONTYPES.STAFF_DELETE_SUCCESS,
+  payload: {
     staff,
   },
 });
 
-export const deleteStaffFailure = (error)=>({
-  type:ADMINACTIONTYPES.STAFF_DELETE_FAILURE,
-  payload:{
+export const deleteStaffFailure = (error) => ({
+  type: ADMINACTIONTYPES.STAFF_DELETE_FAILURE,
+  payload: {
     error,
   },
 });
@@ -81,20 +119,76 @@ export const deleteStaffFailure = (error)=>({
  */
 
 
- export const fetchStudentStart = () =>({
-  type:ADMINACTIONTYPES.SUDENT_FETCH_START,
+export const fetchStudentStart = () => ({
+  type: ADMINACTIONTYPES.SUDENT_FETCH_START,
 });
 
-export const fetchStudentSuccess = (student) =>({
-  type:ADMINACTIONTYPES.STUDENT_FETCH_SUCCESS,
+export const fetchStudentSuccess = (student) => ({
+  type: ADMINACTIONTYPES.STUDENT_FETCH_SUCCESS,
   payload: {
     student,
   },
 });
 
-export const fetchStudentFailure = (error) =>({
-  type:ADMINACTIONTYPES.STUDENT_FETCH_FAILURE,
-  payload:{
+export const fetchStudentFailure = (error) => ({
+  type: ADMINACTIONTYPES.STUDENT_FETCH_FAILURE,
+  payload: {
+    error,
+  },
+});
+
+
+/**
+ * STUDENT CREATE ACTION
+ * 
+ * @returns ACTION 
+ */
+
+export const createSudentStart = () => ({
+  type: ADMINACTIONTYPES.STUDENT_CREATE_START,
+  payload: {
+
+  },
+});
+
+export const createStudentSuccess = (student) => ({
+  type: ADMINACTIONTYPES.STUDENT_CREATE_SUCCESS,
+  payload: {
+    student,
+  },
+});
+
+export const createStudentFailure = (error) => ({
+  type: ADMINACTIONTYPES.STUDENT_CREATE_FAILURE,
+  payload: {
+    error,
+  },
+});
+
+
+/**
+ * STUDENT UPLOAD ACTION
+ * 
+ * @returns ACTION 
+ */
+
+export const uploadSudentStart = () => ({
+  type: ADMINACTIONTYPES.STUDENT_UPLOAD_START,
+  payload: {
+
+  },
+});
+
+export const uploadStudentSuccess = (student) => ({
+  type: ADMINACTIONTYPES.STUDENT_UPLOAD_SUCCESS,
+  payload: {
+    student,
+  },
+});
+
+export const uploadStudentFailure = (error) => ({
+  type: ADMINACTIONTYPES.STUDENT_UPLOAD_FAILURE,
+  payload: {
     error,
   },
 });
@@ -104,19 +198,19 @@ export const fetchStudentFailure = (error) =>({
  * @returns ACTION
  */
 
-export const updateStudentStart = ()=>({
-  type:ADMINACTIONTYPES.STUDENT_UPDATE_START,
+export const updateStudentStart = () => ({
+  type: ADMINACTIONTYPES.STUDENT_UPDATE_START,
 });
 
-export const updateStudentSuccess = (staff)=>({
-  type:ADMINACTIONTYPES.STUDENT_UPDATE__SUCCESS,
-  payload:{
+export const updateStudentSuccess = (staff) => ({
+  type: ADMINACTIONTYPES.STUDENT_UPDATE__SUCCESS,
+  payload: {
     staff,
   },
 });
-export const updateStudentFailure = (error)=>({
-  type:ADMINACTIONTYPES.STUDENT_UPDATE_FAILURE,
-  payload:{
+export const updateStudentFailure = (error) => ({
+  type: ADMINACTIONTYPES.STUDENT_UPDATE_FAILURE,
+  payload: {
     error,
   },
 });
@@ -126,20 +220,20 @@ export const updateStudentFailure = (error)=>({
  * @returns ACTION
  */
 
-export const deleteStudentStart = ()=>({
-  type:ADMINACTIONTYPES.STUDENT_DELETE_START,
+export const deleteStudentStart = () => ({
+  type: ADMINACTIONTYPES.STUDENT_DELETE_START,
 });
 
-export const deleteStudentSuccess = (staff)=>({
-  type:ADMINACTIONTYPES.STUDENT_DELETE_SUCCESS,
-  payload:{
+export const deleteStudentSuccess = (staff) => ({
+  type: ADMINACTIONTYPES.STUDENT_DELETE_SUCCESS,
+  payload: {
     staff,
   },
 });
 
-export const deleteStudentFailure = (error)=>({
-  type:ADMINACTIONTYPES.STUDENT_DELETE_FAILURE,
-  payload:{
+export const deleteStudentFailure = (error) => ({
+  type: ADMINACTIONTYPES.STUDENT_DELETE_FAILURE,
+  payload: {
     error,
   },
 });
@@ -151,21 +245,21 @@ export const deleteStudentFailure = (error)=>({
  * STAFF ASYNC ACTION TYPES
  */
 
- export const fetchStaffAsync = () => {
-  
+export const fetchStaffAsync = () => {
+
   return async (dispatch) => {
- 
+
     try {
       dispatch(fetchStaffStart());
-      
+
       const response = await AdminStaffService.getAll();
-    
+
       dispatch(
         fetchStaffSuccess(
-        
+
           response.data.results
-          
-        )       
+
+        )
       );
 
     } catch (err) {
@@ -175,22 +269,68 @@ export const deleteStudentFailure = (error)=>({
 };
 
 
+export const createStaffAsync = (data) => {
+console.log(data);
+  return async (dispatch) => {
 
-export const updateStaffAsync = (username,email,is_staff,is_superuser) => {
-  
+    
+      dispatch(createStaffStart());
+
+
+      // const response = await AdminStaffService.create(
+      //     username,
+      //     email,
+      //     password,
+      //     password2,
+      //     first_name,
+      //     last_name   
+      // );
+
+    await axios.post('http://sfpm.herokuapp.com/api/staffs',data , {
+        headers: {
+          'Authorization': 'token ' + localStorage.getItem('token')
+        }
+      }).then((res)=>{
+        dispatch(createStaffSuccess(res.data.results));
+      })
+
+      
+
+      .catch(function (error) {
+        dispatch(createStaffFailure(error));
+        if (error.response) {
+      
+          
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          
+          console.log(error.request);
+        } else {
+          console.log('Error', error.message);
+        }
+        console.log(error.config);
+      });
+  };
+};
+
+
+export const updateStaffAsync = (username, email, first_name, last_name) => {
+
   return async (dispatch) => {
 
     try {
       dispatch(updateStaffStart());
 
       const response = await AdminStaffService.update(
-          username,
-          email,
-          is_staff,
-          is_superuser,    
+        username,
+        email,
+        first_name,
+        last_name,
       );
-     
-      dispatch(updateStaffSuccess(response.data.data));
+
+      dispatch(updateStaffSuccess(response.data.results));
     } catch (err) {
       dispatch(updateStaffFailure(err));
     }
@@ -203,10 +343,10 @@ export const deleteStaffAsync = (id) => {
     try {
       dispatch(deleteStaffStart());
       const response = await AdminStaffService.delete(
-        
-            id,
+
+        id,
       );
-    
+
       dispatch(deleteStaffSuccess(response.data.data));
     } catch (err) {
       dispatch(deleteStaffFailure(err));
@@ -224,66 +364,101 @@ export const deleteStaffAsync = (id) => {
  * STUDENT ASYNC ACTION TYPES
  */
 
- export const fetchStudentAsync = () => {
-   
-    return async (dispatch) => {
+export const fetchStudentAsync = () => {
 
-      try {
-          dispatch(fetchStudentStart);
-          
-          const response = await AdminStudentService.getAll();
+  return async (dispatch) => {
 
-        
-          dispatch(
-            fetchStudentSuccess(
-            
-              response.data.results
-              
-            )       
-          );
-      } catch (err) {
-        dispatch(fetchStudentFailure(err));
-      }
-    };
-     
+    try {
+      dispatch(fetchStudentStart);
+
+      const response = await AdminStudentService.getAll();
+
+
+      dispatch(
+        fetchStudentSuccess(
+
+          response.data.results
+
+        )
+      );
+    } catch (err) {
+      dispatch(fetchStudentFailure(err));
+    }
+  };
+
 };
 
 
+export const createStudentAsync = (data) => {
 
-export const updateStudentAsync = (username,email,is_staff,is_superuser,batch,is_active) => {
- return async (dispatch) => {
+  return async (dispatch) => {
 
-   try {
-     dispatch(updateStaffStart());
+    try {
+      dispatch(createSudentStart());
 
-     const response = await AdminStudentService.update(
-         username,
-         email,
-         is_staff,
-         is_superuser,
-         batch,
-         is_active,
-     );
-     dispatch(updateStudentSuccess(response.data.data));
-   } catch (err) {
-     dispatch(updateStaffFailure(err));
-   }
- };
+      const response = await AdminStudentService.create(
+       data,
+      );
+
+      dispatch(createStudentSuccess(response.data.results));
+    } catch (err) {
+      dispatch(createStudentFailure(err));
+    }
+  };
+};
+
+export const uploadStudentAsync = (data) => {
+
+  return async (dispatch) => {
+
+    try {
+      dispatch(uploadSudentStart());
+
+      const response = await AdminStudentService.upload(
+        data,
+      );
+
+      dispatch(uploadStudentSuccess(response.data.results));
+    } catch (err) {
+      dispatch(uploadStudentFailure(err));
+    }
+  };
+};
+
+export const updateStudentAsync = (username, email, is_staff, is_superuser, batch, is_active) => {
+  return async (dispatch) => {
+
+    try {
+      dispatch(updateStaffStart());
+
+      const response = await AdminStudentService.update(
+        username,
+        email,
+        is_staff,
+        is_superuser,
+        batch,
+        is_active,
+      );
+      dispatch(updateStudentSuccess(response.data.data));
+    } catch (err) {
+      dispatch(updateStaffFailure(err));
+    }
+  };
 };
 
 export const deleteStudentAsync = (id) => {
- return async (dispatch) => {
+  return async (dispatch) => {
 
-   try {
-     dispatch(deleteStudentStart());
-     const response = await AdminStudentService.delete(
-       
-           id
-  
-     );
-     dispatch(deleteStudentSuccess(response.data.data));
-   } catch (err) {
-     dispatch(deleteStudentFailure(err));
-   }
- };
+    try {
+      dispatch(deleteStudentStart());
+      const response = await AdminStudentService.delete(
+
+        id
+
+      );
+      dispatch(deleteStudentSuccess(response.data.data));
+    } catch (err) {
+      dispatch(deleteStudentFailure(err));
+    }
+  };
 };

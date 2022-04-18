@@ -9,14 +9,18 @@ import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 // import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
 // ----------------------------------------------------------------------
 import { Provider } from 'react-redux';
 import store from './store';
+
 ReactDOM.render(
   <HelmetProvider>
     <BrowserRouter>
-       <Provider store={store}>
+      <Provider store={store}>
+        <ToastContainer />
         <App />
       </Provider>
     </BrowserRouter>
