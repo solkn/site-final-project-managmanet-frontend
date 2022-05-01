@@ -22,7 +22,8 @@ import Page from '../../../components/Page';
 import Scrollbar from '../../../components/Scrollbar';
 import Iconify from '../../../components/Iconify';
 import SearchNotFound from '../../../components/SearchNotFound';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../../../sections/@dashboard/user';
+import { UserListHead, UserListToolbar } from '../../../sections/@dashboard/user';
+import StaffMoreMenu  from 'src/sections/@dashboard/user/StaffMoreMenu';
 
 
 
@@ -39,7 +40,7 @@ import { LoadingButton } from '@mui/lab';
 
 import { useEffect } from "react";
 import { useDispatch,useSelector } from "react-redux";
-import { fetchStaffAsync,createStaffAsync,updateStaffAsync,deleteStaffAsync } from "../Redux/AdminAction";
+import { fetchStaffAsync,createStaffAsync} from "../Redux/AdminAction";
 
 
 // ----------------------------------------------------------------------
@@ -77,16 +78,6 @@ const  AdminGetStaffList = ()=> {
 
   },[dispatch]);
 
-  useEffect(()=> {
-    dispatch(updateStaffAsync());
-
-  },[dispatch]);
-
-  useEffect(()=> {
-    dispatch(deleteStaffAsync());
-
-  },[dispatch]);
-
 
 
   
@@ -107,8 +98,6 @@ const  AdminGetStaffList = ()=> {
   const RegisterSchema = Yup.object().shape({
     username: Yup.string().required('username is required'),
     email: Yup.string().required('email is required').matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,'invalid email'),
-    password: Yup.string().required('password is required'),
-    confirm_password: Yup.string().required('confirm password is required'),
     first_name: Yup.string().required('first name is required'),
     last_name: Yup.string().required('last name is required'),
   });
@@ -119,8 +108,6 @@ const  AdminGetStaffList = ()=> {
     initialValues: {
       username: '',
       email:'',
-      password:'',
-      confirm_password:'',
       first_name:'',
       last_name:'',
     },
@@ -130,8 +117,6 @@ const  AdminGetStaffList = ()=> {
      const  data =  { 
        username:values.username,
        email:values.email,
-       password:values.password,
-       confirm_password:values.confirm_password,
        first_name:values.first_name,
        last_name:values.last_name 
       };
@@ -287,7 +272,7 @@ function applySortFilter(array, comparator, query) {
           <Typography variant="h4" gutterBottom>
             Staff
           </Typography>
-          <Button variant="contained" onClick={handleOpen} component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
+          <Button variant="contained" onClick={handleOpen} componchchhent={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
             New staff
           </Button>
 
@@ -334,28 +319,6 @@ function applySortFilter(array, comparator, query) {
                 error={Boolean(touched.email && errors.email)}
                 helperText={touched.email && errors.email}
               />
-
-            <TextField
-                fullWidth
-                autoComplete="password"
-                type="text"
-                label="password"
-                {...getFieldProps('password')}
-                error={Boolean(touched.password && errors.password)}
-                helperText={touched.password && errors.password}
-              />
-
-              <TextField
-                fullWidth
-                autoComplete="confirm password"
-                type="text"
-                label="confirm password"
-                {...getFieldProps('confirm_password')}
-                error={Boolean(touched.confirm_password && errors.confirm_password)}
-                helperText={touched.confirm_password && errors.confirm_password}
-              />  
-
-            
               <TextField
                 fullWidth
                 autoComplete="first name"
@@ -448,7 +411,7 @@ function applySortFilter(array, comparator, query) {
 
 
                         <TableCell align="right">
-                          <UserMoreMenu />
+                          <StaffMoreMenu />
                         </TableCell>
                       </TableRow>
                     );

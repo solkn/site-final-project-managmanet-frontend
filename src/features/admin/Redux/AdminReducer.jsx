@@ -93,7 +93,7 @@ export const AdminReducer = (state = INITIAL_STATE, action) =>{
         ...state,
         updateStaffLoading:false,
         updateStaffSuccess:true,
-        staff:[action.payload.staff,...state.staff],
+        staffs:[action.payload.staff,...state.staffs],
       };
     case ADMINACTIONTYPES.STAFF_UPDATE_FAILURE:
       return {
@@ -116,7 +116,6 @@ export const AdminReducer = (state = INITIAL_STATE, action) =>{
         ...state,
         deleteStaffLoading:false,
         deleteStaffSuccess:true,
-        staff:[action.payload.staff,...state.staff],
       };
     case ADMINACTIONTYPES.STAFF_DELETE_FAILURE:
       return {
@@ -201,7 +200,7 @@ export const AdminReducer = (state = INITIAL_STATE, action) =>{
         ...state,
         updateStudentLoading:false,
         updateStudentSuccess:true,
-        student:[action.payload.student,...state.student],
+        students:[action.payload,...state.students],
       };
     case ADMINACTIONTYPES.STUDENT_UPDATE_FAILURE:
       return {
@@ -223,7 +222,6 @@ export const AdminReducer = (state = INITIAL_STATE, action) =>{
         ...state,
         deleteStudentLoading:false,
         deleteStudentSuccess:true,
-        student:[action.payload.student,...state.student],
       };
     case ADMINACTIONTYPES.STUDENT_DELETE_FAILURE:
       return {

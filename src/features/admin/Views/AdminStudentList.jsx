@@ -19,12 +19,16 @@ import {
   CircularProgress,
   Input,
   FormControl,
+  colors,
 } from '@mui/material';
+import UploadFileIcon from '@mui/icons-material/UploadFile'
+
 import Page from '../../../components/Page';
 import Scrollbar from '../../../components/Scrollbar';
 import Iconify from '../../../components/Iconify';
 import SearchNotFound from '../../../components/SearchNotFound';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../../../sections/@dashboard/user';
+import { UserListHead, UserListToolbar } from '../../../sections/@dashboard/user';
+import StudentMoreMenu from 'src/sections/@dashboard/user/StudentMoreMenu';
 
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -95,8 +99,6 @@ const  AdminGetStudentList = ()=> {
   const RegisterSchema = Yup.object().shape({
     username: Yup.string().required('username is required'),
     email: Yup.string().required('email is required').matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,'invalid email'),
-    password: Yup.string().required('password is required'),
-    confirm_password: Yup.string().required('confirm password is required'),
     batch: Yup.string().required('batch is required'),
     first_name: Yup.string().required('first name is required'),
     last_name: Yup.string().required('last name is required'),
@@ -107,8 +109,6 @@ const  AdminGetStudentList = ()=> {
     initialValues: {
       username: '',
       email:'',
-      password:'',
-      confirm_password:'',
       batch:'',
       first_name:'',
       last_name:'',
@@ -119,8 +119,6 @@ const  AdminGetStudentList = ()=> {
       const  data =  { 
         username:values.username,
         email:values.email,
-        password:values.password,
-        confirm_password:values.confirm_password,
         batch:values.batch,
         first_name:values.first_name,
         last_name:values.last_name 
@@ -344,9 +342,8 @@ function applySortFilter(array, comparator, query) {
             New Student
           </Button>
 
-          <Button variant="contained" onClick={handleUploadOpen} component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
-            Upload
-          </Button>
+          <UploadFileIcon onClick={handleUploadOpen} style={{color:"blue"}}/>
+
 
           <Modal
         keepMounted
@@ -369,35 +366,6 @@ function applySortFilter(array, comparator, query) {
             Site Final Project-Repo
           </Typography>
         </Stack>
-        {/* <FormikProvider value={uploadFormik}>
-          <Form autoComplete="off" noValidate onSubmit={handleUploadSubmit}>
-            <Stack spacing={3}>
-              <TextField
-                fullWidth
-                autoComplete=""
-                type="file"
-                onChange={onFileChange}
-                // {...getUploadFieldProps('data')}
-                // error={Boolean(uploadTouched.data && uploadErrors.data)}
-                // helperText={uploadTouched.data && uploadErrors.data}
-              />
-              
-            <LoadingButton
-              fullWidth
-              color="primary"
-              size="large"
-              type="submit"
-              variant="contained"
-              loading={isLoading}
-            >
-              upload
-            </LoadingButton>
-            
-            </Stack>
-
-            
-          </Form>
-        </FormikProvider> */}
 
       <FormControl initialValues={{}} onSubmit={onUpload}>
           
@@ -466,27 +434,7 @@ function applySortFilter(array, comparator, query) {
                 error={Boolean(touched.email && errors.email)}
                 helperText={touched.email && errors.email}
               />
-
-            <TextField
-                fullWidth
-                autoComplete="password"
-                type="text"
-                label="password"
-                {...getFieldProps('password')}
-                error={Boolean(touched.password && errors.password)}
-                helperText={touched.password && errors.password}
-              />
-
-              <TextField
-                fullWidth
-                autoComplete="confirm password"
-                type="text"
-                label="confirm password"
-                {...getFieldProps('confirm_password')}
-                error={Boolean(touched.confirm_password && errors.confirm_password)}
-                helperText={touched.confirm_password && errors.confirm_password}
-              />  
-
+              
              <TextField
                 fullWidth
                 autoComplete="batch"
@@ -590,7 +538,7 @@ function applySortFilter(array, comparator, query) {
                         <TableCell align="left">{last_name}</TableCell>
 
                         <TableCell align="right">
-                          <UserMoreMenu initial="student"/>
+                          <StudentMoreMenu initial="student"/>
                         </TableCell>
                       </TableRow>
                     );

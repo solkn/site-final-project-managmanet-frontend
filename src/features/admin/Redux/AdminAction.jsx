@@ -327,35 +327,88 @@ export const updateStaffAsync = (id,data) => {
 
   return async (dispatch) => {
 
-    try {
-      dispatch(updateStaffStart());
+  //   try {
+  //     dispatch(updateStaffStart());
 
-      const response = await AdminStaffService.update(
-        id,
-        data
-      );
+  //     const response = await AdminStaffService.update(
+  //       id,
+  //       data
+  //     );
 
-      dispatch(updateStaffSuccess(response.data.results));
-    } catch (err) {
-      dispatch(updateStaffFailure(err));
+  //     dispatch(updateStaffSuccess(response.data.results));
+  //   } catch (err) {
+  //     dispatch(updateStaffFailure(err));
+  //   }
+  // };
+  dispatch(updateStaffStart());
+  await axios.put(`http://sfpm.herokuapp.com/api/staffs/${id}`,data , {
+    headers: {
+      'Authorization': 'token ' + localStorage.getItem('token')
     }
-  };
+  }).then((res)=>{
+    dispatch(updateStaffSuccess(res.data.results));
+  }) 
+
+  .catch(function (error) {
+    dispatch(updateStaffFailure(error));
+    if (error.response) {
+  
+      
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      
+      console.log(error.request);
+    } else {
+      console.log('Error', error.message);
+    }
+    console.log(error.config);
+  });
+};
+
 };
 
 export const deleteStaffAsync = (id) => {
   return async (dispatch) => {
 
-    try {
-      dispatch(deleteStaffStart());
-      const response = await AdminStaffService.delete(
+    // try {
+    //   dispatch(deleteStaffStart());
+    //   const response = await AdminStaffService.delete(
 
-        id
-      );
+    //     id
+    //   );
 
-      dispatch(deleteStaffSuccess(response.data.data));
-    } catch (err) {
-      dispatch(deleteStaffFailure(err));
-    }
+    //   dispatch(deleteStaffSuccess(response.data.data));
+    // } catch (err) {
+    //   dispatch(deleteStaffFailure(err));
+    // }
+    dispatch(deleteStaffStart());
+    await axios.delete(`http://sfpm.herokuapp.com/api/staffs/${id}`, {
+      headers: {
+        'Authorization': 'token ' + localStorage.getItem('token')
+      }
+    }).then((res)=>{
+      dispatch(deleteStaffSuccess(res.data));
+    })
+
+
+    .catch(function (error) {
+      dispatch(deleteStaffFailure(error));
+      if (error.response) {
+    
+        
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      } else if (error.request) {
+        
+        console.log(error.request);
+      } else {
+        console.log('Error', error.message);
+      }
+      console.log(error.config);
+    });
   };
 };
 
@@ -478,33 +531,84 @@ export const uploadStudentAsync = (data) => {
 export const updateStudentAsync = (id,data) => {
   return async (dispatch) => {
 
-    try {
-      dispatch(updateStaffStart());
+    // try {
+    //   dispatch(updateStaffStart());
 
-      const response = await AdminStudentService.update(
-        id,
-        data
-      );
-      dispatch(updateStudentSuccess(response.data.results));
-    } catch (err) {
-      dispatch(updateStaffFailure(err));
-    }
+    //   const response = await AdminStudentService.update(
+    //     id,
+    //     data
+    //   );
+    //   dispatch(updateStudentSuccess(response.data.results));
+    // } catch (err) {
+    //   dispatch(updateStaffFailure(err));
+    // }
+    dispatch(updateStudentStart());
+    await axios.put(`http://sfpm.herokuapp.com/api/students/${id}`,data , {
+      headers: {
+        'Authorization': 'token ' + localStorage.getItem('token')
+      }
+    }).then((res)=>{
+      dispatch(updateStudentSuccess(res.data));
+    }) 
+  
+    .catch(function (error) {
+      dispatch(updateStudentFailure(error));
+      if (error.response) {
+    
+        
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      } else if (error.request) {
+        
+        console.log(error.request);
+      } else {
+        console.log('Error', error.message);
+      }
+      console.log(error.config);
+    });
   };
 };
 
 export const deleteStudentAsync = (id) => {
   return async (dispatch) => {
 
-    try {
-      dispatch(deleteStudentStart());
-      const response = await AdminStudentService.delete(
+    // try {
+    //   dispatch(deleteStudentStart());
+    //   const response = await AdminStudentService.delete(
 
-        id
+    //     id
 
-      );
-      dispatch(deleteStudentSuccess(response.data.results));
-    } catch (err) {
-      dispatch(deleteStudentFailure(err));
-    }
+    //   );
+    //   dispatch(deleteStudentSuccess(response.data.results));
+    // } catch (err) {
+    //   dispatch(deleteStudentFailure(err));
+    // }
+    dispatch(deleteStudentStart());
+    await axios.delete(`http://sfpm.herokuapp.com/api/students/${id}`, {
+      headers: {
+        'Authorization': 'token ' + localStorage.getItem('token')
+      }
+    }).then((res)=>{
+      dispatch(deleteStudentSuccess(res.data));
+    })
+
+
+    .catch(function (error) {
+      dispatch(deleteStudentFailure(error));
+      if (error.response) {
+    
+        
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      } else if (error.request) {
+        
+        console.log(error.request);
+      } else {
+        console.log('Error', error.message);
+      }
+      console.log(error.config);
+    });
   };
 };
