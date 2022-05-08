@@ -26,23 +26,12 @@ class AdminStaffService{
         );
     }
 
-    create(username,email,password,password2,first_name,last_name) { 
-        console.log(username,email,password,password2,first_name,last_name);
+    create(data) { 
         return axios.post(
             `${baseURL}/staffs`,
-            {
-                
-                username:username,
-                email:email,
-                password:password,
-                password2:password2,
-                first_name:first_name,
-                last_name:last_name,
-                
-                
-            },
-
-          
+            
+              data,
+            
           
             {
                 headers: authHeader()
@@ -51,13 +40,10 @@ class AdminStaffService{
         );
     }
 
-    update(username,email,is_staff,is_superuser) {
+    update(id,data) {
         return axios.put(
-            `${baseURL}/staffs/${username}`,
-            username,
-            email,
-            is_staff,
-            is_superuser,
+            `${baseURL}/staffs/${id}`,
+            data,
             {
                 headers:authHeader()
             }

@@ -13,7 +13,7 @@ const INITIAL_STATE = {
   fetchStaffFailure:null,
   updateStaffFailure:null,
   deleteStaffFailure:null,
-  staffs:{},
+  staffs:[],
   staff:{},
 
   fetchStudentLoading:false,
@@ -29,7 +29,7 @@ const INITIAL_STATE = {
   fetchStudentFailure:null,
   updateStudentFailure:null,
   deleteStudentFailure:null,
-  students:{},
+  students:[],
   student:{},
 };
 

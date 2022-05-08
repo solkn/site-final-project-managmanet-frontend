@@ -51,7 +51,7 @@ function AdminDashboard() {
 
             <Grid item xs={12} sm={6} md={4}>
               <DashboardCard
-                title="Staff"
+                title="Staffs"
                 total={state.staffs.length}
                 color="warning"
                 icon={'icon-park:file-staff'}

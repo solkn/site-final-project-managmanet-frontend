@@ -48,15 +48,10 @@ class AdminStudentService{
         );
     }
 
-    update(username,email,is_staff,is_superuser,batch,is_active) {
+    update(id,data) {
         return axios.put(
-            `${baseURL}/students${username}`,
-            username,
-            email,
-            is_staff,
-            is_superuser,
-            batch,
-            is_active,
+            `${baseURL}/students${id}`,
+            data,
             {
                 headers:authHeader()
             }
