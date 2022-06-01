@@ -9,6 +9,7 @@ import DashboardCard from './adminComponent/DashboardCard';
 import CoordinatorCard from './adminComponent/CoordinatorCard';
 import TopTrandingProject from './adminComponent/TopTrandingProject';
 import axios from 'axios';
+import { COMMON_URL } from 'src/common/api';
 function AdminDashboard() {
   const [first, setfirst] = useState('');
 
@@ -25,7 +26,7 @@ function AdminDashboard() {
 
   const fetchProfile = async () => {
     setfirst(
-      await axios.get(`http://sfpm.herokuapp.com/api/admins/${localStorage.getItem('user_id')}`, {
+      await axios.get(`${COMMON_URL}/admins/${localStorage.getItem('user_id')}`, {
         headers: {
           Authorization: 'token ' + localStorage.getItem('token')
         }

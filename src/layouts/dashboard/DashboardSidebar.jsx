@@ -12,7 +12,9 @@ import useResponsive from '../../hooks/useResponsive';
 import Logo from '../../components/Logo';
 import Scrollbar from '../../components/Scrollbar';
 import NavSection from '../../components/NavSection';
-//
+import { useDispatch, useSelector } from 'react-redux';
+import { getOneUser } from 'src/common/redux/Profile/action';
+
 // import adminsidebarConfig from '../../../../layouts/dashboard/SidebarConfig';
 
 // ----------------------------------------------------------------------
@@ -43,12 +45,25 @@ DashboardSidebar.propTypes = {
 };
 
 export default function DashboardSidebar({ from, item, isOpenSidebar, onCloseSidebar }) {
+
+  const is_superadmin = localStorage.getItem('is_superadmin');
+  const is_advisor = localStorage.getItem('is_advisor');
+  // const user_id = localStorage.getItem('user_id');
+  const is_coordinator = localStorage.getItem('is_coordinator');
+  const is_staff = localStorage.getItem('is_staff');
+  const is_examiner = localStorage.getItem('is_examiner');
+  const is_student = localStorage.getItem('is_student');
+
   const { pathname } = useLocation();
-
+  console.log('from  ', from);
   const isDesktop = useResponsive('up', 'lg');
+  const dispatch = useDispatch();
 
+  const state = useSelector(state => state.oneUser);
+  console.log(state.user?.username);
   useEffect(() => {
     console.log(from);
+    dispatch(getOneUser())
     if (isOpenSidebar) {
       onCloseSidebar();
     }
@@ -65,31 +80,26 @@ export default function DashboardSidebar({ from, item, isOpenSidebar, onCloseSid
       <Box sx={{ px: 2.5, py: 3, display: 'inline-flex' }}>
         <Logo />
       </Box>
-
       <Box sx={{ mb: 5, mx: 2.5 }}>
-        <Link underline="none" component={RouterLink} to="#">
-          <AccountStyle>
-            <Avatar src={account.photoURL} alt="photoURL" />
-            <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {account.displayName}
-              </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {from === 's' ? 'ADMIN' : 'STUDENT'}
-              </Typography>
-            </Box>
-          </AccountStyle>
-        </Link>
+        {/* <Link underline="none" component={RouterLink} to="dashboarad"> */}
+        <AccountStyle>
+          <Avatar src={account.photoURL} alt="photoURL" />
+          <Box sx={{ ml: 2 }}>
+            <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
+              {state.user?.username}
+            </Typography>
+            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+              {
+                is_superadmin === "true" ? "ADMIN" :
+                  (is_advisor === "true" || is_examiner === "true") ? "Staff" :
+                    is_coordinator === "true" ? "Coordinator" :"Student"
+              }
+            </Typography>
+          </Box>
+        </AccountStyle>
+        {/* </Link> */}
       </Box>
-
       <NavSection navConfig={item} />
-      <Box sx={{ px: 2.5, pb: 1, mt: 3 }}>
-        <Stack alignItems="center" spacing={1} sx={{ borderRadius: 2, position: 'relative' }}>
-          <Button href="#" target="_blank" variant="contained">
-            Get More?
-          </Button>
-        </Stack>
-      </Box>
     </Scrollbar>
   );
 

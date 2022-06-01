@@ -32,9 +32,10 @@ DashboardCard.propTypes = {
   sx: PropTypes.object,
 };
 
-export default function DashboardCard({ title, total, icon, color = 'primary', sx, ...other }) {
+export default function DashboardCard({ onclick, title, total, icon, color = 'primary', sx, ...other }) {
   return (
     <Card
+      onClick={() => onclick}
       sx={{
         py: 5,
         boxShadow: 0,

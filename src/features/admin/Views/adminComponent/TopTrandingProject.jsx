@@ -67,7 +67,7 @@ function OrderItem({ item, isLast }) {
 
         <Typography variant="caption" sx={{ color: 'text.secondary' }}>
           {/* {fDateTime(time)} */}
-          Group 5
+          Group number
         </Typography>
       </TimelineContent>
     </TimelineItem>

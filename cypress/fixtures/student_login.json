@@ -1,0 +1,48 @@
+{
+    "token": "84e076716bbfd8cc4154b2eaf4edb39751bb85c0",
+    "user_id": 39,
+    "is_superadmin": false,
+    "is_staff": false,
+    "is_coordinator": false,
+    "is_student": true,
+    "group": {
+        "id": 3,
+        "group_name": "Group test",
+        "batch": "2014",
+        "members": [
+            {
+                "id": 7,
+                "username": "username222",
+                "email": "stu222@mailinator.com",
+                "batch": "2014"
+            },
+            {
+                "id": 8,
+                "username": "username333",
+                "email": "stu333@mailinator.com",
+                "batch": "2014"
+            }
+        ],
+        "advisors": [
+            {
+                "id": 5,
+                "username": "abebe",
+                "email": "abebeww@gmail.com"
+            }
+        ],
+        "examiners": [
+            {
+                "id": 6,
+                "username": "staff2",
+                "email": "staff2@mailinator.com"
+            },
+            {
+                "id": 7,
+                "username": "teodros",
+                "email": "teodros@gmail.com"
+            }
+        ]
+    },
+    "advisor_to": [],
+    "examiner_to": []
+}

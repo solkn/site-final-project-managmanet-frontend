@@ -3,6 +3,7 @@ import { ADMINACTIONTYPES } from "./AdminType";
 import AdminStaffService from "../services/AdminStaffService";
 import AdminStudentService from "../services/AdminStudentService";
 import axios from "axios";
+import { COMMON_URL } from "src/common/api";
 
 /**
  * STAFF FETCH ACTION
@@ -39,10 +40,15 @@ export const createStaffStart = () => ({
   type: ADMINACTIONTYPES.STAFF_CREATE_START,
 });
 
-export const createStaffSuccess = (data) => ({
+export const createStaffSuccess = (username, email, password, password2, first_name, last_name) => ({
   type: ADMINACTIONTYPES.STAFF_CREATE_SUCCESS,
   payload: {
-  data,
+    username,
+    email,
+    password,
+    password2,
+    first_name,
+    last_name
   },
 });
 
@@ -139,7 +145,7 @@ export const fetchStudentFailure = (error) => ({
  * @returns ACTION 
  */
 
-export const createStudentStart = () => ({
+export const createSudentStart = () => ({
   type: ADMINACTIONTYPES.STUDENT_CREATE_START,
   payload: {
 
@@ -197,10 +203,10 @@ export const updateStudentStart = () => ({
   type: ADMINACTIONTYPES.STUDENT_UPDATE_START,
 });
 
-export const updateStudentSuccess = (student) => ({
+export const updateStudentSuccess = (staff) => ({
   type: ADMINACTIONTYPES.STUDENT_UPDATE__SUCCESS,
   payload: {
-    student,
+    staff,
   },
 });
 export const updateStudentFailure = (error) => ({
@@ -219,10 +225,10 @@ export const deleteStudentStart = () => ({
   type: ADMINACTIONTYPES.STUDENT_DELETE_START,
 });
 
-export const deleteStudentSuccess = (student) => ({
+export const deleteStudentSuccess = (staff) => ({
   type: ADMINACTIONTYPES.STUDENT_DELETE_SUCCESS,
   payload: {
-    student,
+    staff,
   },
 });
 
@@ -251,9 +257,7 @@ export const fetchStaffAsync = () => {
 
       dispatch(
         fetchStaffSuccess(
-
           response.data.results
-
         )
       );
 
@@ -267,52 +271,21 @@ export const fetchStaffAsync = () => {
 export const createStaffAsync = (data) => {
 console.log(data);
   return async (dispatch) => {
-
-    // try{
-    //   dispatch(createStaffStart);
-    // const response = await axios.post('http://sfpm.herokuapp.com/api/staffs',
-       
-    // {data},
-    //    {
-    //     headers: {
-    //             'Authorization': 'token ' + localStorage.getItem('token')
-    //           }
-         
-    //    }
-    // );
-    // dispatch(createStaffSuccess(response.data));
-
-    // }catch(err){
-    //   dispatch(createStaffFailure(err));
-
-    // }
-    
       dispatch(createStaffStart());
-
-    await axios.post('http://sfpm.herokuapp.com/api/staffs',data , {
+    await axios.post(`${COMMON_URL}/staffs`,data , {
         headers: {
           'Authorization': 'token ' + localStorage.getItem('token')
         }
       }).then((res)=>{
         dispatch(createStaffSuccess(res.data.results));
       })
-
-      // await AdminStaffService.create(data).then((res)=>{
-      //   dispatch(createStaffSuccess(res.data.results));
-      // })
-
-      
-
       .catch(function (error) {
         dispatch(createStaffFailure(error));
         if (error.response) {
-      
-          
           console.log(error.response.data);
           console.log(error.response.status);
           console.log(error.response.headers);
         } else if (error.request) {
-          
           console.log(error.request);
         } else {
           console.log('Error', error.message);
@@ -323,92 +296,41 @@ console.log(data);
 };
 
 
-export const updateStaffAsync = (id,data) => {
+export const updateStaffAsync = (username, email, first_name, last_name) => {
 
   return async (dispatch) => {
 
-  //   try {
-  //     dispatch(updateStaffStart());
+    try {
+      dispatch(updateStaffStart());
 
-  //     const response = await AdminStaffService.update(
-  //       id,
-  //       data
-  //     );
+      const response = await AdminStaffService.update(
+        username,
+        email,
+        first_name,
+        last_name,
+      );
 
-  //     dispatch(updateStaffSuccess(response.data.results));
-  //   } catch (err) {
-  //     dispatch(updateStaffFailure(err));
-  //   }
-  // };
-  dispatch(updateStaffStart());
-  await axios.put(`http://sfpm.herokuapp.com/api/staffs/${id}`,data , {
-    headers: {
-      'Authorization': 'token ' + localStorage.getItem('token')
+      dispatch(updateStaffSuccess(response.data.results));
+    } catch (err) {
+      dispatch(updateStaffFailure(err));
     }
-  }).then((res)=>{
-    dispatch(updateStaffSuccess(res.data.results));
-  }) 
-
-  .catch(function (error) {
-    dispatch(updateStaffFailure(error));
-    if (error.response) {
-  
-      
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
-    } else if (error.request) {
-      
-      console.log(error.request);
-    } else {
-      console.log('Error', error.message);
-    }
-    console.log(error.config);
-  });
-};
-
+  };
 };
 
 export const deleteStaffAsync = (id) => {
   return async (dispatch) => {
 
-    // try {
-    //   dispatch(deleteStaffStart());
-    //   const response = await AdminStaffService.delete(
+    try {
+      dispatch(deleteStaffStart());
+      const response = await AdminStaffService.delete(
 
-    //     id
-    //   );
+        id,
+      );
 
-    //   dispatch(deleteStaffSuccess(response.data.data));
-    // } catch (err) {
-    //   dispatch(deleteStaffFailure(err));
-    // }
-    dispatch(deleteStaffStart());
-    await axios.delete(`http://sfpm.herokuapp.com/api/staffs/${id}`, {
-      headers: {
-        'Authorization': 'token ' + localStorage.getItem('token')
-      }
-    }).then((res)=>{
-      dispatch(deleteStaffSuccess(res.data));
-    })
-
-
-    .catch(function (error) {
-      dispatch(deleteStaffFailure(error));
-      if (error.response) {
-    
-        
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-      } else if (error.request) {
-        
-        console.log(error.request);
-      } else {
-        console.log('Error', error.message);
-      }
-      console.log(error.config);
-    });
+      dispatch(deleteStaffSuccess(response.data.data));
+    } catch (err) {
+      dispatch(deleteStaffFailure(err));
+    }
   };
 };
 
@@ -428,19 +350,13 @@ export const fetchStudentAsync = () => {
 
     try {
       dispatch(fetchStudentStart);
-
       const response = await AdminStudentService.getAll();
-
-
+      console.log("hehehehehhe: "+response.data);
       dispatch(
         fetchStudentSuccess(
-
           response.data
-
         )
       );
-      console.log('students:',response);
-      
     } catch (err) {
       dispatch(fetchStudentFailure(err));
     }
@@ -453,45 +369,17 @@ export const createStudentAsync = (data) => {
 
   return async (dispatch) => {
 
-    // try {
-    //   dispatch(createSudentStart());
+    try {
+      dispatch(createSudentStart());
 
-    //   const response = await AdminStudentService.create(
-    //    data,
-    //   );
+      const response = await AdminStudentService.create(
+       data,
+      );
 
-    //   dispatch(createStudentSuccess(response.data.results));
-    // } catch (err) {
-    //   dispatch(createStudentFailure(err));
-    // }
-    dispatch(createStudentStart());
-
-    await axios.post('http://sfpm.herokuapp.com/api/students',data , {
-        headers: {
-          'Authorization': 'token ' + localStorage.getItem('token')
-        }
-      }).then((res)=>{
-        dispatch(createStudentSuccess(res.data));
-      })
-
-      
-
-      .catch(function (error) {
-        dispatch(createStudentFailure(error));
-        if (error.response) {
-      
-          
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          
-          console.log(error.request);
-        } else {
-          console.log('Error', error.message);
-        }
-        console.log(error.config);
-      });
+      dispatch(createStudentSuccess(response.data.results));
+    } catch (err) {
+      dispatch(createStudentFailure(err));
+    }
   };
 };
 
@@ -499,116 +387,54 @@ export const uploadStudentAsync = (data) => {
 
   return async (dispatch) => {
 
-    dispatch(uploadSudentStart());
+    try {
+      dispatch(uploadSudentStart());
 
-    await axios.post('http://sfpm.herokuapp.com/api/students/2014',data , {
-        headers: {
-          'Authorization': 'token ' + localStorage.getItem('token'),
-          'Content-Type':'multipart/form-data'
-        }
-      }).then((res)=>{
-        dispatch(uploadStudentSuccess(res.data));
-      })
+      const response = await AdminStudentService.upload(
+        data,
+      );
 
-      .catch(function (error) {
-        dispatch(uploadStudentFailure(error));
-        if (error.response) {
-          
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          
-          console.log(error.request);
-        } else {
-          console.log('Error', error.message);
-        }
-        console.log(error.config);
-      });
+      dispatch(uploadStudentSuccess(response.data.results));
+    } catch (err) {
+      dispatch(uploadStudentFailure(err));
+    }
   };
 };
 
-export const updateStudentAsync = (id,data) => {
+export const updateStudentAsync = (username, email, is_staff, is_superuser, batch, is_active) => {
   return async (dispatch) => {
 
-    // try {
-    //   dispatch(updateStaffStart());
+    try {
+      dispatch(updateStaffStart());
 
-    //   const response = await AdminStudentService.update(
-    //     id,
-    //     data
-    //   );
-    //   dispatch(updateStudentSuccess(response.data.results));
-    // } catch (err) {
-    //   dispatch(updateStaffFailure(err));
-    // }
-    dispatch(updateStudentStart());
-    await axios.put(`http://sfpm.herokuapp.com/api/students/${id}`,data , {
-      headers: {
-        'Authorization': 'token ' + localStorage.getItem('token')
-      }
-    }).then((res)=>{
-      dispatch(updateStudentSuccess(res.data));
-    }) 
-  
-    .catch(function (error) {
-      dispatch(updateStudentFailure(error));
-      if (error.response) {
-    
-        
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-      } else if (error.request) {
-        
-        console.log(error.request);
-      } else {
-        console.log('Error', error.message);
-      }
-      console.log(error.config);
-    });
+      const response = await AdminStudentService.update(
+        username,
+        email,
+        is_staff,
+        is_superuser,
+        batch,
+        is_active,
+      );
+      dispatch(updateStudentSuccess(response.data.data));
+    } catch (err) {
+      dispatch(updateStaffFailure(err));
+    }
   };
 };
 
 export const deleteStudentAsync = (id) => {
   return async (dispatch) => {
 
-    // try {
-    //   dispatch(deleteStudentStart());
-    //   const response = await AdminStudentService.delete(
+    try {
+      dispatch(deleteStudentStart());
+      const response = await AdminStudentService.delete(
 
-    //     id
+        id
 
-    //   );
-    //   dispatch(deleteStudentSuccess(response.data.results));
-    // } catch (err) {
-    //   dispatch(deleteStudentFailure(err));
-    // }
-    dispatch(deleteStudentStart());
-    await axios.delete(`http://sfpm.herokuapp.com/api/students/${id}`, {
-      headers: {
-        'Authorization': 'token ' + localStorage.getItem('token')
-      }
-    }).then((res)=>{
-      dispatch(deleteStudentSuccess(res.data));
-    })
-
-
-    .catch(function (error) {
-      dispatch(deleteStudentFailure(error));
-      if (error.response) {
-    
-        
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-      } else if (error.request) {
-        
-        console.log(error.request);
-      } else {
-        console.log('Error', error.message);
-      }
-      console.log(error.config);
-    });
+      );
+      dispatch(deleteStudentSuccess(response.data.data));
+    } catch (err) {
+      dispatch(deleteStudentFailure(err));
+    }
   };
 };

@@ -11,7 +11,7 @@ import Page from '../components/Page';
 
 const RootStyle = styled(Page)(({ theme }) => ({
   display: 'flex',
-  minHeight: '100%',
+  minHeight: '90%',
   alignItems: 'center',
   paddingTop: theme.spacing(15),
   paddingBottom: theme.spacing(10)

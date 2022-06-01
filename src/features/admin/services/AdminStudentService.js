@@ -1,7 +1,6 @@
 import { authHeader } from "./auth_header";
 import axios from "axios";
-
-const baseURL = "http://sfpm.herokuapp.com/api";
+import { COMMON_URL } from "src/common/api";
 
 
 class AdminStudentService{
@@ -10,7 +9,7 @@ class AdminStudentService{
         
 
         return axios.get(
-            `${baseURL}/students`,
+            `${COMMON_URL}/students`,
             {
                 headers: authHeader()
           
@@ -21,7 +20,7 @@ class AdminStudentService{
 
     get(id) {
         return axios.get(
-            `${baseURL}/students${id}`,
+            `${COMMON_URL}/students${id}`,
             {
                 headers:authHeader()
             }
@@ -30,7 +29,7 @@ class AdminStudentService{
 
     create(data) {
         return axios.post(
-           `${baseURL}/students`,
+           `${COMMON_URL}/students`,
             data,
             {
                 headers:authHeader()
@@ -40,7 +39,7 @@ class AdminStudentService{
 
     upload(data){
         return axios.post(
-            `${baseURL}/students`,
+            `${COMMON_URL}/students`,
             data,
             {
                 headers:authHeader()
@@ -48,10 +47,15 @@ class AdminStudentService{
         );
     }
 
-    update(id,data) {
+    update(username,email,is_staff,is_superuser,batch,is_active) {
         return axios.put(
-            `${baseURL}/students${id}`,
-            data,
+            `${COMMON_URL}/students${username}`,
+            username,
+            email,
+            is_staff,
+            is_superuser,
+            batch,
+            is_active,
             {
                 headers:authHeader()
             }
@@ -60,7 +64,7 @@ class AdminStudentService{
 
     delete(id) {
         return axios.delete(
-            `${baseURL}/students${id}`,
+            `${COMMON_URL}/students${id}`,
             {
                 headers:authHeader()
             }

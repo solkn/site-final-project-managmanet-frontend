@@ -21,6 +21,11 @@ const studentsidebarConfig = [
     path: '/student/chat',
     icon: getIcon('bi:chat-left-dots-fill')
   },
+  {
+    title: 'submission',
+    path: '/student/submission',
+    icon: getIcon('ant-design:file-done-outlined')
+  }
 
   // {
   //   title: 'Settings',

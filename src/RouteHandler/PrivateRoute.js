@@ -9,29 +9,25 @@ function AuthWrapper() {
   console.log(state);
   console.log('helloooooo..... ');
   if (isAuthenticated) {
-    console.log('suppepperrrr adminnnn: ' + state.is_student);
     if (state.is_superadmin === 'true') {
+      console.log('is_adminnnn: ' + state.is_superadmin);
       return <Navigate to="/admin/dashboard" />;
     }
     if (state.is_student === 'true') {
+      console.log('is_student: ' + state.is_student);
       return <Navigate to="/student/dashboard" />;
+    }
+    if (
+      (state.advisor_to?.length !== 0 || state.examiner_to?.length !== 0) && state.is_staff === 'true'
+    ) {
+      return <Navigate to="/staff/dashboard" />;
+    }
+    if (state.is_coordinator === 'true') {
+      return <Navigate to="/coordinator/dashboard" />;
     }
     return <Navigate to="/login" />;
   }
   return <Navigate to="/login" />;
-
-  // return (
-  //   <>
-  //     <Grid pt={3} container spacing={2}>
-  //       <Grid item xs={2}></Grid>
-  //       <Grid item xs={10}>
-  //         <h3>made by group 5 </h3>
-
-  //         <i>version: 1.0 </i>
-  //       </Grid>
-  //     </Grid>
-  //   </>
-  // );
 }
 
 export default AuthWrapper;

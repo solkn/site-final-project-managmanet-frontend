@@ -39,17 +39,27 @@ export default function Login() {
   const auth = useSelector((state) => state.auth);
   const user_id = localStorage.getItem('user_id');
   const is_student = localStorage.getItem('is_student');
+  const is_staff = localStorage.getItem('is_staff');
   const is_superadmin = localStorage.getItem('is_superadmin');
+  const is_coordinator = localStorage.getItem('is_coordinator');
+  const is_advisor = localStorage.getItem('is_advisor');
+  const is_examiner = localStorage.getItem('is_examiner');
 
   console.log(auth);
-  // if (auth.user_id) return <Navigate to="/admin/dashboard" />;
   if (user_id) {
     console.log('suppepperrrr adminnnn: ' + auth.is_superadmin);
     if (is_superadmin === 'true') {
       return <Navigate to="/admin/dashboard" />;
-    } else if (is_student === 'true') {
+    } if (is_student === 'true') {
       return <Navigate to="/student/dashboard" />;
     }
+    if (is_coordinator === 'true') {
+      return <Navigate to="/coordinator/dashboard" />;
+    }
+    if ((is_advisor === 'true' || is_examiner === 'true') && is_staff === 'true') {
+      return <Navigate to="/staff/dashboard" />;
+    }
+
   }
 
   return (
@@ -58,14 +68,13 @@ export default function Login() {
         {/* <AuthLayout /> */}
         <SectionStyle sx={{ display: { xs: 'none', md: 'flex' } }}>
           <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-            Hi, Welcome Back
+            Hi, Welcome!
           </Typography>
           <img src="/static/illustrations/illustration_log.png" alt="login" />
         </SectionStyle>
         <Container maxWidth="sm">
           <ContentStyle>
             <LoginForm />
-
             <Typography
               variant="body2"
               align="center"

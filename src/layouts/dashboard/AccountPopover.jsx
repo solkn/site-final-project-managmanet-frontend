@@ -8,7 +8,7 @@ import Iconify from '../../components/Iconify';
 import MenuPopover from '../../components/MenuPopover';
 //
 import account from '../../_mocks_/adminAccount';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signOut } from 'src/features/auth/AuthAction';
 
 // ----------------------------------------------------------------------
@@ -22,12 +22,12 @@ const MENU_OPTIONS = [
   {
     label: 'Profile',
     icon: 'eva:person-fill',
-    linkTo: '#'
+    linkTo: '/admin/staff'
   },
   {
     label: 'Settings',
     icon: 'eva:settings-2-fill',
-    linkTo: '#'
+    linkTo: '/admin/setting'
   }
 ];
 
@@ -52,6 +52,11 @@ export default function AccountPopover() {
     navigate('/login', { replace: true });
     console.log('redirect to signin');
   };
+
+
+
+  const state = useSelector(state => state.oneUser);
+  console.log(state.user?.username);
 
   return (
     <>
@@ -86,10 +91,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>
-            {account.displayName}
+            {state.user?.username}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {account.email}
+            {state.user?.email}
           </Typography>
         </Box>
 

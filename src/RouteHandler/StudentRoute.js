@@ -1,5 +1,5 @@
 import { Navigate, useLocation } from 'react-router-dom';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 
 function StudentPrivateRoute({ children }) {
   const isAuthenticated = localStorage.getItem('user_id');

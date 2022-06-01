@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "id": 9,
+      "username": "yishak",
+      "email": "yisak@gmail.com",
+      "first_name": "Yishak",
+      "last_name": "Girma",
+      "user": 15
+    },
+    {
+      "id": 10,
+      "username": "kabila",
+      "email": "kabilahailie@gmail.com",
+      "first_name": "Kabila",
+      "last_name": "Haile",
+      "user": 19
+    }
+   
+  ]
+}

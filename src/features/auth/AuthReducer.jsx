@@ -1,5 +1,5 @@
-import { SIGNIN, SIGNOUT, USER_LOADED } from './AuthType';
-import { toast } from 'react-toastify';
+import { LOGIN_FAILURE, LOGIN_START, LOGIN_SUCCESS, SIGNOUT, USER_LOADED } from './AuthType';
+// import { toast } from 'react-toastify';
 
 const initialState = {
   token: localStorage.getItem('token'),
@@ -8,7 +8,7 @@ const initialState = {
   is_staff: localStorage.getItem('is_staff'),
   is_coordinator: localStorage.getItem('is_coordinator'),
   is_student: localStorage.getItem('is_student'),
-  loading: true
+  loading: false
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -16,11 +16,14 @@ export const authReducer = (state = initialState, action) => {
   console.log('initial state: ' + state);
   switch (type) {
     case USER_LOADED:
-    case SIGNIN:
+    case LOGIN_START:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case LOGIN_SUCCESS:
       console.log(action);
-      toast.success('Welcome...', {
-        position: toast.POSITION.TOP_RIGHT
-      });
       console.log('payload: ' + payload);
       return {
         ...state,
@@ -32,7 +35,11 @@ export const authReducer = (state = initialState, action) => {
         is_coordinator: payload.is_coordinator,
         is_student: payload.is_student
       };
-
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        loading: false,
+      };
     case SIGNOUT:
       localStorage.removeItem('token');
       localStorage.removeItem('user_id');
@@ -40,9 +47,11 @@ export const authReducer = (state = initialState, action) => {
       localStorage.removeItem('is_coordinator');
       localStorage.removeItem('is_superadmin');
       localStorage.removeItem('is_student');
-      toast.success('GoodBy...', {
-        position: toast.POSITION.TOP_RIGHT
-      });
+      localStorage.removeItem('is_examiner');
+      localStorage.removeItem('is_advisor');
+      // toast.success('GoodBy...', {
+      //   position: toast.POSITION.TOP_RIGHT
+      // });
       return {
         token: null,
         user_id: null,

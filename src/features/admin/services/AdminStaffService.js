@@ -1,14 +1,14 @@
 import { authHeader } from "./auth_header";
 import axios from "axios";
+import { COMMON_URL } from "src/common/api";
 
-const baseURL = "http://sfpm.herokuapp.com/api";
 
 class AdminStaffService{
 
     getAll() {
         
         return axios.get(
-            `${baseURL}/staffs`,
+            `${COMMON_URL}/staffs`,
             {
                 headers: authHeader()
           
@@ -19,19 +19,28 @@ class AdminStaffService{
 
     get(id) {
         return axios.get(
-            `${baseURL}/staffs/${id}`,
+            `${COMMON_URL}/staffs/${id}`,
             {
                 headers:authHeader()
             }
         );
     }
 
-    create(data) { 
+    create(username,email,first_name,last_name) { 
+        console.log(username,email,first_name,last_name);
         return axios.post(
-            `${baseURL}/staffs`,
-            
-              data,
-            
+            `${COMMON_URL}/staffs`,
+            {
+                
+                username:username,
+                email:email,
+                first_name:first_name,
+                last_name:last_name,
+                
+                
+            },
+
+          
           
             {
                 headers: authHeader()
@@ -40,10 +49,13 @@ class AdminStaffService{
         );
     }
 
-    update(id,data) {
+    update(username,email,is_staff,is_superuser) {
         return axios.put(
-            `${baseURL}/staffs/${id}`,
-            data,
+            `${COMMON_URL}/staffs/${username}`,
+            username,
+            email,
+            is_staff,
+            is_superuser,
             {
                 headers:authHeader()
             }
@@ -52,7 +64,7 @@ class AdminStaffService{
 
     delete(id) {
         return axios.delete(
-            `${baseURL}/staffs/${id}`,
+            `${COMMON_URL}/staffs/${id}`,
             {
                 headers:authHeader()
             }

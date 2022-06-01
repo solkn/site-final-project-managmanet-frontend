@@ -1,0 +1,71 @@
+{
+    "token": "8a19fcef06ef4561f3fe70200f31816da7934632",
+    "user_id": 87,
+    "is_superadmin": false,
+    "is_staff": true,
+    "is_coordinator": false,
+    "is_student": false,
+    "group": null,
+    "advisor_to": [
+        {
+            "id": 1,
+            "group_name": "Group_01",
+            "batch": "2014",
+            "members": [
+                {
+                    "id": 1,
+                    "username": "zemenu23",
+                    "email": "zemenutesema@gmail.com",
+                    "batch": "2014"
+                },
+                {
+                    "id": 2,
+                    "username": "kefe",
+                    "email": "kefe@gm34ail.com",
+                    "batch": "2014"
+                }
+            ],
+            "advisors": [
+                {
+                    "id": 1,
+                    "username": "teodros",
+                    "email": "teodros@gmail.com"
+                },
+                {
+                    "id": 3,
+                    "username": "staffTEST",
+                    "email": "staffTEST@mailinator.com"
+                }
+            ],
+            "examiners": []
+        },
+        {
+            "id": 2,
+            "group_name": "Group_02",
+            "batch": "2014",
+            "members": [
+                {
+                    "id": 4,
+                    "username": "Alefew",
+                    "email": "alefewyimer2@gm34ail.com",
+                    "batch": "2014"
+                },
+                {
+                    "id": 5,
+                    "username": "Natinael",
+                    "email": "natinaelawel@gm34ail.com",
+                    "batch": "2014"
+                }
+            ],
+            "advisors": [
+                {
+                    "id": 4,
+                    "username": "staffTEST",
+                    "email": "staffTEST@mailinator.com"
+                }
+            ],
+            "examiners": []
+        }
+    ],
+    "examiner_to": []
+}

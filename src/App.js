@@ -8,9 +8,9 @@ import ScrollToTop from './components/ScrollToTop';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { loadUser } from './features/auth/AuthAction';
+import NoInternetConnection from './utils/noInternetConnection';
 
 // ----------------------------------------------------------------------
-
 export default function App() {
   const dispatch = useDispatch();
 
@@ -19,10 +19,12 @@ export default function App() {
   }, [dispatch]);
 
   return (
-    <ThemeConfig>
-      <ScrollToTop />
-      <GlobalStyles />
-      <AppRoutes />
-    </ThemeConfig>
+
+        <ThemeConfig>
+          <ScrollToTop />
+          <GlobalStyles />
+          <AppRoutes />
+        </ThemeConfig>
+
   );
 }

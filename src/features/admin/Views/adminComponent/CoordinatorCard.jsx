@@ -45,7 +45,7 @@ NewsItem.propTypes = {
   news: PropTypes.shape({
     description: PropTypes.string,
     image: PropTypes.string,
-    postedAt: PropTypes.instanceOf(Date),
+    postedAt: '2014',
     title: PropTypes.string,
   }),
 };
@@ -68,7 +68,7 @@ function NewsItem({ news }) {
       </Box>
 
       <Typography variant="caption" sx={{ pr: 3, flexShrink: 0, color: 'text.secondary' }}>
-        {fToNow(postedAt)}
+        2014
       </Typography>
     </Stack>
   );

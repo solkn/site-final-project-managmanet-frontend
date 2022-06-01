@@ -1,0 +1,11 @@
+{
+    "token": "ab5c3e15b4545b39d1c79fc71c820712b3f8b423",
+    "user_id": 1,
+    "is_superadmin": true,
+    "is_staff": true,
+    "is_coordinator": false,
+    "is_student": false,
+    "group": null,
+    "advisor_to": [],
+    "examiner_to": []
+}

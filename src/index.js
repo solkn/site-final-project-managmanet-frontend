@@ -9,17 +9,20 @@ import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 // import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-toastify/dist/ReactToastify.css';
 // ----------------------------------------------------------------------
 import { Provider } from 'react-redux';
 import store from './store';
+// import { Toaster } from 'react-hot-toast';
+// toast.configure();
 
 ReactDOM.render(
   <HelmetProvider>
     <BrowserRouter>
       <Provider store={store}>
+        {/* <Toaster position="top-center" reverseOrder={false} /> */}
         <ToastContainer />
         <App />
       </Provider>
